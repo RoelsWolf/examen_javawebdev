@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xlmns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/styling.css}">
 </head>
-<body>
 
+<body>
+	<div class="content-wrapper">
+		<header>
+			<div th:text="|ISBN: ${book.ISBNNumber}|"></div>
+		</header>
+		<div class="pages-wrapper">
+			<aside class="page left-page">
+				<img alt="" th:src="${book.imageUrl}" class="cover-image">
+			</aside>
+			<main class="page right-page">
+				<div class="title" th:text="${book.name}"></div>
+			</main>
+		</div>
+	</div>
 </body>
 </html>

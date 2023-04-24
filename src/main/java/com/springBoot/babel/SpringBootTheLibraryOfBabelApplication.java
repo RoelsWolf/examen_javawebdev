@@ -1,24 +1,29 @@
 package com.springBoot.babel;
 
-import java.util.Locale;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@SpringBootApplication
-public class SpringBootTheLibraryOfBabelApplication {
+import util.JPAUtil;
 
+@SpringBootApplication(scanBasePackages = {"com.springBoot.babel", "config, controllers"})
+public class SpringBootTheLibraryOfBabelApplication implements WebMvcConfigurer{
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootTheLibraryOfBabelApplication.class, args);
+		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+		EntityManager em = emf.createEntityManager();
 	}
 	
-	@Bean
-	public LocaleResolver localeResolver() {
-	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(new Locale("nl", "BE"));
-	    return slr;
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "/books");
 	}
+	
+	
 }
+	
