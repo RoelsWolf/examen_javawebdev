@@ -17,13 +17,12 @@ public class SpringBootTheLibraryOfBabelApplication implements WebMvcConfigurer{
 		SpringApplication.run(SpringBootTheLibraryOfBabelApplication.class, args);
 		EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 		EntityManager em = emf.createEntityManager();
-	}
-	
+	}	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addRedirectViewController("/", "/books");
 	}
-	
+
 	
 }
 	

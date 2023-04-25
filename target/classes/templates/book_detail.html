@@ -4,20 +4,41 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" th:href="@{/css/styling.css}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter&family=Lato:ital,wght@1,300&family=Roboto+Slab:wght@100;200&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="content-wrapper">
-		<header>
-			<div th:text="|ISBN: ${book.ISBNNumber}|"></div>
-		</header>
-		<div class="pages-wrapper">
-			<aside class="page left-page">
-				<img alt="" th:src="${book.imageUrl}" class="cover-image">
-			</aside>
-			<main class="page right-page">
-				<div class="title" th:text="${book.name}"></div>
-			</main>
+		<h1 th:text="${book.name}">
+			Title
+		</h1>
+		<div class="detail-page-wrapper">
+			<div class="book">
+				<img alt="" th:src="${book.imageUrl}">
+				<div class="shadow"></div>
+			</div>
+			<span class="vertical-seperator"></span>
+			<div class="book-details">
+				<p th:text="|ISBN: ${book.ISBNNumber}|">ISBN</p>
+				<p th:text="|Retail price: ${book.price}|">Price</p>
+				<div>
+					<p>Authors:</p>
+					<ul th:each="author: ${book.authors}">
+						<li th:text="${author.name}">authorPlaceholder</li>
+					</ul>
+				</div>
+				<div>
+					<p>Locations:</p>
+					<ul th:each="location: ${book.locations}">
+						<li th:text="|${location.placeCode1} ${location.placeCode2} ${location.placeName}|"></li>
+					</ul>
+				</div>
+				<div class="like-me">
+					❤️<a th:href="@{/books/favorite(ISBN=${book.ISBNNumber})}" class="like-me-href">LIKE ME</a>❤️
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
